@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { api, useAuth } from "../context/AuthContext";
 
 const statusPills = {
@@ -18,6 +19,7 @@ const chipOptions = [
 
 const DoctorDashboard = () => {
     const { user } = useAuth();
+    const navigate = useNavigate();
     const doctorId = user?._id || user?.id;
     const [stats, setStats] = useState(null);
     const [appointments, setAppointments] = useState([]);
@@ -27,6 +29,8 @@ const DoctorDashboard = () => {
     const [activeFilter, setActiveFilter] = useState("today");
     const [actionInFlight, setActionInFlight] = useState(null);
     const [completeModal, setCompleteModal] = useState({ open: false, bookingId: null, notes: "" });
+    const [refreshing, setRefreshing] = useState(false);
+    const [lastSynced, setLastSynced] = useState(null);
 
     const combineDateTime = (appointment) => {
         const date = new Date(appointment.appointmentDate);
@@ -71,10 +75,28 @@ const DoctorDashboard = () => {
         }
     }, [doctorId]);
 
+    const refreshDashboard = useCallback(async () => {
+        if (!doctorId) return;
+        try {
+            setRefreshing(true);
+            await Promise.all([loadStats(), loadAppointments()]);
+            setLastSynced(new Date());
+        } finally {
+            setRefreshing(false);
+        }
+    }, [doctorId, loadStats, loadAppointments]);
+
     useEffect(() => {
-        loadStats();
-        loadAppointments();
-    }, [loadStats, loadAppointments]);
+        refreshDashboard();
+    }, [refreshDashboard]);
+
+    useEffect(() => {
+        if (!doctorId) return;
+        const interval = setInterval(() => {
+            refreshDashboard();
+        }, 60000);
+        return () => clearInterval(interval);
+    }, [doctorId, refreshDashboard]);
 
     const countByStatus = useMemo(() => ({
         pending: appointments.filter((a) => a.status === "pending").length,
@@ -174,17 +196,43 @@ const DoctorDashboard = () => {
                                 Track today’s workload, stay on top of approvals, and manage every patient visit from one modern dashboard.
                             </p>
                         </div>
-                        <div className="rounded-2xl bg-white/10 backdrop-blur p-5 min-w-[220px]">
-                            <p className="text-sm uppercase tracking-wide text-white/70">Account Status</p>
-                            <p className="text-2xl font-semibold mt-1 flex items-center gap-2">
+                        <div className="rounded-2xl bg-white/10 backdrop-blur p-5 min-w-[220px] space-y-3">
+                            <div>
+                                <p className="text-sm uppercase tracking-wide text-white/70">Account Status</p>
+                                <p className="text-2xl font-semibold mt-1 flex items-center gap-2">
                                 {user?.isApproved === "approved" ? "Verified" : user?.isApproved === "pending" ? "Pending" : "Review Needed"}
                                 {user?.isApproved === "approved" ? "✅" : "⏳"}
-                            </p>
-                            <p className="text-white/80 mt-3 text-sm">
-                                {!disabled
-                                    ? "You can manage appointments freely."
-                                    : "Waiting for admin approval. You’ll be notified once reviewed."}
-                            </p>
+                                </p>
+                                <p className="text-white/80 mt-2 text-sm">
+                                    {!disabled
+                                        ? "You can manage appointments freely."
+                                        : "Waiting for admin approval. You’ll be notified once reviewed."}
+                                </p>
+                            </div>
+                            <div className="rounded-2xl border border-white/20 px-4 py-3 text-sm text-white/80 space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <span>Last sync</span>
+                                    <span className="font-semibold">{lastSynced ? lastSynced.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "—"}</span>
+                                </div>
+                                <div className="flex flex-col gap-2">
+                                    <button
+                                        onClick={refreshDashboard}
+                                        disabled={refreshing}
+                                        className="w-full rounded-full border border-white/40 py-1.5 text-sm font-semibold text-white hover:bg-white/10 disabled:opacity-50"
+                                        type="button"
+                                    >
+                                        {refreshing ? "Refreshing…" : "Force refresh"}
+                                    </button>
+                                    <button
+                                        onClick={() => navigate("/doctor/profile")}
+                                        disabled={disabled}
+                                        className="w-full rounded-full border border-white/40 py-1.5 text-sm font-semibold text-white hover:bg-white/10 disabled:opacity-50"
+                                        type="button"
+                                    >
+                                        Doctor profile
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.45),_transparent_55%)]" />
@@ -371,7 +419,9 @@ const DoctorDashboard = () => {
                             </div>
                             <button
                                 disabled={disabled}
+                                onClick={() => navigate("/doctor/schedule")}
                                 className="mt-5 w-full rounded-full bg-white text-slate-900 font-semibold py-2 disabled:opacity-40"
+                                type="button"
                             >
                                 Manage schedule
                             </button>

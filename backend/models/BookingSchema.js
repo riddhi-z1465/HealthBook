@@ -12,6 +12,11 @@ const bookingSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    reasonForVisit: {
+      type: String,
+      trim: true,
+      maxLength: 240,
+    },
     ticketPrice: {
       type: Number,
       required: true

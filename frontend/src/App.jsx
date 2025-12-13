@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PatientDashboard from "./pages/PatientDashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
+import DoctorSchedule from "./pages/DoctorSchedule";
+import DoctorProfile from "./pages/DoctorProfile";
 import AdminDashboard from "./pages/AdminDashboard";
 import Doctors from "./pages/Doctors";
 import DoctorDetails from "./pages/DoctorDetails";
@@ -64,6 +66,14 @@ function AppRoutes() {
       <Route
         path="/doctor-dashboard"
         element={<Layout><ProtectedRoute allowedRoles={["doctor"]}><DoctorDashboard /></ProtectedRoute></Layout>}
+      />
+      <Route
+        path="/doctor/schedule"
+        element={<Layout><ProtectedRoute allowedRoles={["doctor"]}><DoctorSchedule /></ProtectedRoute></Layout>}
+      />
+      <Route
+        path="/doctor/profile"
+        element={<Layout><ProtectedRoute allowedRoles={["doctor"]}><DoctorProfile /></ProtectedRoute></Layout>}
       />
       <Route
         path="/admin-dashboard"

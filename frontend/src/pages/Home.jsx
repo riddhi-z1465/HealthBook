@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import doctorTeam from "../assets/images/DoctorTeam.png";
+import doctorTeam from "../assets/images/DoctorTeamImage.png";
+import doctorTeamHero from "../assets/images/DoctorTeam.png";
 import heroFallback from "../assets/images/hero-img01.png";
 
 const Home = () => {
@@ -165,7 +166,7 @@ const Home = () => {
                             <div className="bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl p-4 relative overflow-hidden min-h-[500px] flex items-center justify-center">
                                 <div className="bg-white rounded-2xl w-full h-full flex items-center justify-center p-2">
                                     <img
-                                        src={heroSrc}
+                                        src={doctorTeamHero}
                                         alt="Doctor team"
                                         className="relative z-10 rounded-xl w-full h-full max-h-[460px] object-cover shadow-2xl"
                                         loading="eager"
@@ -240,151 +241,219 @@ const Home = () => {
             </section >
 
             {/* Services Section */}
-            < section className="py-20 bg-white" >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="inline-block px-4 py-2 bg-yellow-300 rounded-full text-sm font-semibold mb-6">
-                        ⚡ Services
+            <section className="py-24 bg-gradient-to-b from-white to-slate-50/70">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+                    <div className="space-y-4">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-yellow-200 bg-yellow-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
+                            <span className="h-2 w-2 rounded-full bg-amber-400" />
+                            Services
+                        </span>
+                        <div className="flex flex-wrap items-end gap-6">
+                            <div className="space-y-3">
+                                <h2 className="text-4xl font-bold text-slate-900 leading-tight">Wide range of services</h2>
+                                <p className="text-slate-500 text-lg max-w-2xl">
+                                    From preventive screenings to complex procedures, HealthBook brings every essential specialty into one calm hub.
+                                </p>
+                            </div>
+                            <div className="h-12 w-px bg-slate-200 hidden lg:block" />
+                            <div className="flex items-center gap-2 text-sm font-semibold text-slate-500">
+                                <span className="h-2 w-2 rounded-full bg-emerald-400" />
+                                24/7 nurse hotline • Same-day appointments
+                            </div>
+                        </div>
                     </div>
 
-                    <h2 className="text-4xl font-bold text-gray-900 mb-12">Wide range of services</h2>
-
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {services.map((service, index) => (
                             <div
                                 key={index}
-                                className="bg-gray-50 rounded-2xl p-6 hover:bg-teal-50 hover:shadow-lg transition cursor-pointer group"
+                                className="rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-[0_25px_60px_rgba(15,23,42,0.07)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-emerald-400 hover:shadow-[0_30px_70px_rgba(15,23,42,0.12)]"
                             >
-                                <div className="mb-4">
-                                    <ServiceIcon type={service.iconType} />
+                                <div className="flex items-center justify-between">
+                                    <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                                        <ServiceIcon type={service.iconType} />
+                                    </div>
+                                    <span className="text-xs font-semibold uppercase tracking-wide text-slate-300">0{index + 1}</span>
                                 </div>
-                                <h3 className="font-bold text-gray-900 mb-1">{service.title}</h3>
-                                <p className="text-sm text-gray-600">{service.subtitle}</p>
-                                <div className="mt-4 text-teal-600 opacity-0 group-hover:opacity-100 transition">
-                                    <span className="text-2xl">→</span>
+                                <h3 className="mt-6 text-xl font-semibold text-slate-900">{service.title}</h3>
+                                <p className="text-sm text-slate-500">{service.subtitle}</p>
+                                <div className="mt-6 inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm">
+                                    Explore
+                                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-emerald-100 bg-emerald-50 text-base">
+                                        →
+                                    </span>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
-            </section >
+            </section>
+
+            {/* Team Banner */}
+            <section className="bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className=" overflow-hidden ">
+                        <img
+                            src={doctorTeam}
+                            alt="Our team of experienced doctors"
+                            className="w-full object-cover grayscale hover:grayscale-0 transition duration-500 ease-out"
+                        />
+                    </div>
+                </div>
+            </section>
 
             {/* Express Analysis Section */}
-            < section className="py-20 bg-gradient-to-br from-gray-50 to-teal-50" >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        {/* Left - Image */}
+            <section className="py-24 bg-gradient-to-br from-[#f6fbfb] via-white to-[#e9f7f4]">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.2fr)_1fr] items-center">
+                        {/* Left - visual card */}
                         <div className="relative">
-                            <div className="bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl overflow-hidden min-h-[400px] flex items-center justify-center">
-                                <div className="text-center text-white">
-                                    <svg className="w-24 h-24 mx-auto mb-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                                    </svg>
-                                    <p className="text-2xl font-bold">Laboratory Analysis</p>
+                            <div className="rounded-[32px] bg-gradient-to-br from-[#32d5c1] to-[#058d7f] shadow-[0_40px_90px_rgba(5,141,127,0.35)] min-h-[360px] flex items-center justify-center overflow-hidden">
+                                <div className="absolute inset-0 opacity-30">
+                                    <div className="absolute -right-20 top-10 w-64 h-64 bg-white/20 blur-3xl" />
+                                    <div className="absolute left-10 bottom-6 w-32 h-32 border border-white/20 rounded-[40px] rotate-6" />
+                                </div>
+                                <div className="relative text-center text-white space-y-4">
+                                    <div className="inline-flex items-center justify-center w-24 h-24 rounded-full border-2 border-white/50">
+                                        <svg
+                                            className="w-12 h-12"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={1.4}
+                                                d="M10 3h4l-.3 6.4a3 3 0 00.73 2.13l5.72 6.43c.97 1.1.16 2.84-1.32 2.84H5.17c-1.48 0-2.29-1.74-1.32-2.84l5.72-6.43A3 3 0 0010.3 9.4L10 3z"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <p className="text-sm uppercase tracking-[0.3em] text-white/70">Laboratory</p>
+                                        <p className="text-3xl font-semibold">Express analysis</p>
+                                        <p className="text-sm text-white/80">
+                                            Fast diagnostics • Accurate results
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Right - Content */}
-                        <div>
-                            <h2 className="text-4xl font-bold text-gray-900 mb-4">Express analysis</h2>
-                            <p className="text-gray-600 mb-8">
-                                We perform all types of laboratory tests. The results of the study are available in your personal account.
-                            </p>
-
-                            <div className="space-y-3 mb-8">
-                                <div className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium shadow-sm mr-2">
-                                    🩸 Hematology
-                                </div>
-                                <div className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium shadow-sm mr-2">
-                                    🧬 Genetics
-                                </div>
-                                <div className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium shadow-sm mr-2">
-                                    💉 Biochemistry
-                                </div>
-                                <div className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium shadow-sm mr-2">
-                                    🦠 General clinical tests
-                                </div>
-                                <div className="inline-block px-4 py-2 bg-white rounded-full text-sm font-medium shadow-sm mr-2">
-                                    🧪 Immunology
-                                </div>
-                                <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium shadow-sm">
-                                    All →
-                                </div>
+                        {/* Right - content */}
+                        <div className="space-y-6">
+                            <div>
+                                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal-500/80 mb-3">
+                                    Express analysis
+                                </p>
+                                <h2 className="text-4xl font-bold text-slate-900 mb-4 leading-tight">
+                                    Get lab results in record time.
+                                </h2>
+                                <p className="text-lg text-slate-600">
+                                    We perform all types of laboratory tests. Results are synced to your personal
+                                    HealthBook account so you and your doctor can act immediately.
+                                </p>
                             </div>
 
-                            <div className="flex items-center space-x-4">
+                            <div className="flex flex-wrap gap-3">
+                                {[
+                                    { label: "Hematology", icon: "🩸", pill: "bg-white text-slate-700" },
+                                    { label: "Genetics", icon: "🧬", pill: "bg-white text-slate-700" },
+                                    { label: "Biochemistry", icon: "💉", pill: "bg-white text-slate-700" },
+                                    { label: "General clinical tests", icon: "🦠", pill: "bg-white text-slate-700" },
+                                    { label: "Immunology", icon: "🧪", pill: "bg-white text-slate-700" },
+                                    { label: "All", icon: "→", pill: "bg-[#0aa984] text-white" },
+                                ].map(({ label, icon, pill }) => (
+                                    <div
+                                        key={label}
+                                        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium shadow-[0_10px_25px_rgba(15,23,42,0.08)] ${pill}`}
+                                    >
+                                        <span>{icon}</span>
+                                        <span>{label}</span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-wrap gap-4">
                                 <Link
                                     to="/register"
-                                    className="px-8 py-3.5 bg-teal-600 text-white rounded-full font-semibold hover:bg-teal-700 transition shadow-lg"
+                                    className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#0fc1a4] to-[#089477] px-8 py-3.5 font-semibold text-white shadow-[0_20px_35px_rgba(15,193,164,0.35)] hover:shadow-[0_25px_45px_rgba(8,148,119,0.45)] transition-transform hover:-translate-y-0.5"
                                 >
                                     Sign Up
                                 </Link>
-                                <button className="px-8 py-3.5 bg-white border-2 border-gray-300 text-gray-700 rounded-full font-semibold hover:border-teal-600 hover:text-teal-600 transition">
+                                <button className="inline-flex items-center justify-center rounded-full border border-slate-200 px-8 py-3.5 font-semibold text-slate-700 bg-white hover:border-teal-400 hover:text-teal-600 transition">
                                     Learn more →
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Doctors Section */}
-            < section className="py-20 bg-white" >
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="inline-block px-4 py-2 bg-yellow-300 rounded-full text-sm font-semibold mb-6">
-                        ⚡ Doctors
+            <section className="py-24 bg-white">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+                    <div className="space-y-4">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-yellow-200 bg-yellow-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
+                            <span className="h-2 w-2 rounded-full bg-amber-400" />
+                            Doctors
+                        </span>
+                        <div>
+                            <h2 className="text-4xl font-bold text-slate-900 leading-tight">Medical center doctors</h2>
+                            <p className="text-slate-500 text-lg">
+                                Highly qualified specialists with years of hands-on experience and patient trust.
+                            </p>
+                        </div>
                     </div>
-
-                    <h2 className="text-4xl font-bold text-gray-900 mb-4">Medical center doctors</h2>
-                    <p className="text-gray-600 mb-12">
-                        Highly qualified specialists with many years of experience
-                    </p>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {doctors.map((doctor, index) => (
                             <div
-                                key={index}
-                                className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 hover:shadow-xl transition cursor-pointer border-2 border-transparent hover:border-teal-500"
+                                key={doctor.name}
+                                className="rounded-[28px] border border-slate-100 bg-white/90 p-8 shadow-[0_25px_70px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-1 hover:border-emerald-300 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)]"
                             >
-                                <div className="text-center mb-4">
-                                    <div className="w-32 h-32 mx-auto bg-gradient-to-br from-teal-100 to-teal-200 rounded-full flex items-center justify-center mb-4">
-                                        <svg className="w-20 h-20 text-teal-700" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                        </svg>
+                                <div className="flex flex-col items-center text-center gap-4">
+                                    <div className="relative">
+                                        <div className="h-28 w-28 rounded-full bg-gradient-to-br from-emerald-100 to-cyan-100 flex items-center justify-center text-5xl text-emerald-600">
+                                            <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                            </svg>
+                                        </div>
+                                        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-lime-100 px-3 py-1 text-xs font-semibold text-emerald-700 shadow-sm">
+                                            {doctor.specialty}
+                                        </span>
                                     </div>
-                                    <div className="inline-block px-3 py-1 bg-lime-200 rounded-full text-xs font-semibold mb-2">
-                                        {doctor.specialty}
+                                    <div>
+                                        <h3 className="text-xl font-semibold text-slate-900">{doctor.name}</h3>
+                                        <p className="text-sm text-slate-500">{doctor.experience}</p>
                                     </div>
+                                    <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-700">
+                                        <span>⭐</span>
+                                        <span>{doctor.rating}</span>
+                                        <span className="text-amber-400">•</span>
+                                        <span>Patient favorite</span>
+                                    </div>
+                                    <Link
+                                        to={`/doctors/${index + 1}`}
+                                        className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-emerald-600 px-6 py-3 font-semibold text-white shadow-[0_15px_35px_rgba(16,185,129,0.35)] hover:bg-emerald-700"
+                                    >
+                                        Book Appointment
+                                    </Link>
                                 </div>
-
-                                <h3 className="font-bold text-gray-900 text-lg mb-1 text-center">{doctor.name}</h3>
-                                <p className="text-sm text-gray-600 text-center mb-3">{doctor.experience} experience</p>
-
-                                <div className="flex items-center justify-center space-x-1 mb-4">
-                                    <span className="text-yellow-400">⭐</span>
-                                    <span className="font-semibold text-gray-900">{doctor.rating}</span>
-                                </div>
-
-                                <Link
-                                    to={`/doctors/${index + 1}`}
-                                    className="block w-full py-2.5 bg-teal-600 text-white text-center rounded-full font-medium hover:bg-teal-700 transition"
-                                >
-                                    Book Appointment
-                                </Link>
                             </div>
                         ))}
                     </div>
 
-                    <div className="text-center mt-12">
+                    <div className="text-center">
                         <Link
                             to="/doctors"
-                            className="inline-block px-8 py-3.5 bg-white border-2 border-teal-600 text-teal-600 rounded-full font-semibold hover:bg-teal-50 transition"
+                            className="inline-flex items-center gap-2 rounded-full border border-emerald-300 px-8 py-3.5 font-semibold text-emerald-700 hover:bg-emerald-50"
                         >
                             View All Doctors →
                         </Link>
                     </div>
                 </div>
-            </section >
+            </section>
 
         </div >
     );

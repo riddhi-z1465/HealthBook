@@ -7,8 +7,8 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-transparent py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-full bg-gradient-to-r from-teal-500/80 to-teal-600/80 text-white px-6 py-3 shadow-lg/50 border border-white/20 backdrop-blur-md flex items-center justify-between">
-          <div className="flex items-center space-x-3">
+        <div className="rounded-full opacity-85 bg-gradient-to-r from-teal-500/80 to-teal-600/90 text-white px-6 py-3 shadow-lg/50 border border-white/20 backdrop-blur-md flex items-center justify-between">
+          <div className="flex items-center space-x-3 ">
             <div className="w-10 h-10 rounded-full flex items-center justify-center bg-[#07bca3] shadow-inner shadow-black/20">
               <span className="text-white text-2xl font-bold">+</span>
             </div>

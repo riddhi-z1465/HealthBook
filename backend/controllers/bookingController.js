@@ -113,7 +113,7 @@ export const checkAvailability = async (req, res) => {
  */
 export const createBooking = async (req, res) => {
     try {
-        const { doctor, appointmentDate, appointmentTime, ticketPrice } = req.body;
+        const { doctor, appointmentDate, appointmentTime, ticketPrice, reasonForVisit } = req.body;
 
         // Validate required fields
         if (!doctor || !appointmentDate || !appointmentTime) {
@@ -165,6 +165,7 @@ export const createBooking = async (req, res) => {
             appointmentDate,
             appointmentTime,
             ticketPrice: ticketPrice || doctorDoc.ticketPrice,
+            reasonForVisit: reasonForVisit?.trim() || undefined,
             status: 'pending'
         });
 
