@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import doctorTeam from "../assets/images/DoctorTeamImage.png";
 import doctorTeamHero from "../assets/images/DoctorTeam.png";
 import heroFallback from "../assets/images/hero-img01.png";
@@ -97,151 +98,169 @@ const Home = () => {
 
     const heroSrc = import.meta.env.VITE_HERO_IMAGE || doctorTeam;
 
+    useEffect(() => {
+        const observed = document.querySelectorAll(".reveal-on-scroll");
+        if (!observed.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+        );
+
+        observed.forEach((element) => observer.observe(element));
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <div className="min-h-screen bg-gray-50">
 
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-gray-50 to-teal-50 py-16">
+            <section className="bg-gradient-to-br from-[#f7fbff] via-white to-[#e3f5f3] py-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 items-center">
                         {/* Left Content */}
-                        <div>
-                            <div className="inline-block px-4 py-2 bg-yellow-300 rounded-full text-sm font-semibold mb-6">
-                                ⚡ Medical center for everyone
+                        <div className="space-y-8 animate-rise">
+                            <span className="inline-flex items-center gap-2 rounded-full border border-yellow-200 bg-yellow-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500 shadow-sm animate-rise">
+                                <span className="h-2 w-2 rounded-full bg-amber-400" />
+                                Medical center for everyone
+                            </span>
+
+                            <div className="space-y-4 animate-rise animate-delay-1">
+                                <h1 className="text-5xl sm:text-6xl font-bold text-slate-900 leading-tight">
+                                    Book doctor appointments effortlessly{" "}
+                                    <span className="text-transparent bg-gradient-to-r from-teal-500 to-emerald-500 bg-clip-text">
+                                        for your family
+                                    </span>
+                                </h1>
+                                <p className="text-lg text-slate-600 leading-relaxed max-w-2xl">
+                                    A trusted healthcare platform connecting patients and doctors through secure booking, digital records, and coordinated clinic management—so care feels simple.
+                                </p>
                             </div>
 
-                            <h1 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                                Book doctor appointments
-                                effortlessly
-                                for you and your family
-                            </h1>
-
-                            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-                                A trusted healthcare platform designed to connect patients and doctors through seamless appointment booking, secure medical records, and efficient clinic management.
-                            </p>
-
-                            <div className="flex items-center space-x-4 mb-8">
+           			    <div className="flex flex-wrap gap-4 animate-rise animate-delay-2">
                                 <Link
                                     to="/register"
-                                    className="px-8 py-3.5 bg-teal-600 text-white rounded-full font-semibold hover:bg-teal-700 transition shadow-lg"
+                                    className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-[0_18px_35px_rgba(16,185,129,0.35)] hover:-translate-y-0.5 hover:bg-emerald-700 transition-transform"
                                 >
                                     Get Started
                                 </Link>
                                 <Link
                                     to="/doctors"
-                                    className="px-8 py-3.5 bg-white border-2 border-gray-300 text-gray-700 rounded-full font-semibold hover:border-teal-600 hover:text-teal-600 transition"
+                                    className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-8 py-3.5 text-base font-semibold text-slate-700 hover:border-emerald-400 hover:text-emerald-600 transition"
                                 >
                                     Find Doctors →
                                 </Link>
                             </div>
 
-                            {/* Stats */}
-                            <div className="flex items-center space-x-4 bg-white rounded-2xl p-4 shadow-md inline-flex">
-                                <div className="flex -space-x-2">
-                                    <div className="w-10 h-10 bg-teal-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-6 h-6 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                        </svg>
-                                    </div>
-                                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                        </svg>
-                                    </div>
-                                    <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-6 h-6 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                        </svg>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="rounded-3xl border border-slate-100 bg-white/90 p-5 shadow-[0_20px_45px_rgba(15,23,42,0.08)] backdrop-blur animate-rise animate-delay-2">
+                                    <p className="text-xs uppercase tracking-wide text-slate-400">Trusted specialists</p>
+                                    <div className="mt-2 flex items-center gap-3">
+                                        <div className="flex -space-x-2">
+                                            {["teal", "violet", "amber"].map((color, idx) => (
+                                                <div key={color} className={`h-10 w-10 rounded-full border-2 border-white bg-${color}-100 flex items-center justify-center animate-rise`} style={{ animationDelay: `${0.2 * (idx + 1)}s` }}>
+                                                    <svg className={`h-5 w-5 text-${color}-600`} fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                                    </svg>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <div>
+                                            <p className="text-3xl font-semibold text-slate-900">+68</p>
+                                            <p className="text-sm text-slate-500">Professional doctors with experience</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <p className="text-2xl font-bold text-gray-900">+68</p>
-                                    <p className="text-sm text-gray-600">Professional doctors<br />with experience</p>
+                                <div className="rounded-3xl border border-emerald-100 bg-emerald-50/70 p-5 shadow-inner animate-rise animate-delay-3">
+                                    <p className="text-sm font-semibold text-emerald-700">Same-day appointments</p>
+                                    <p className="text-2xl font-bold text-emerald-900 mt-1">24/7</p>
+                                    <p className="text-xs text-emerald-700/80">support team on standby</p>
                                 </div>
                             </div>
                         </div>
 
                         {/* Right Content - Hero Image */}
-                        <div className="relative">
-                            <div className="bg-gradient-to-br from-teal-400 to-teal-600 rounded-3xl p-4 relative overflow-hidden min-h-[500px] flex items-center justify-center">
-                                <div className="bg-white rounded-2xl w-full h-full flex items-center justify-center p-2">
-                                    <img
-                                        src={doctorTeamHero}
-                                        alt="Doctor team"
-                                        className="relative z-10 rounded-xl w-full h-full max-h-[460px] object-cover shadow-2xl"
-                                        loading="eager"
-                                        onError={(e) => { e.currentTarget.src = heroFallback; }}
-                                    />
+                        <div className="relative animate-rise animate-delay-2">
+                            <div className="relative rounded-[36px] bg-white p-3 shadow-[0_35px_80px_rgba(15,23,42,0.15)]">
+                                <div className="rounded-[28px] border-4 border-teal-100 bg-gradient-to-br from-teal-400 to-cyan-500 p-4">
+                                    <div className="rounded-[22px] bg-white p-2 animate-float-slow">
+                                        <img
+                                            src={doctorTeamHero}
+                                            alt="Doctor team"
+                                            className="rounded-[18px] w-full object-cover shadow-2xl"
+                                            loading="eager"
+                                            onError={(e) => { e.currentTarget.src = heroFallback; }}
+                                        />
+                                    </div>
                                 </div>
-                                <div className="absolute inset-0 bg-white/10"></div>
-                            </div>
-
-                            <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl p-4">
-                                <div className="flex items-center space-x-2">
-
+                                <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-11/12 rounded-3xl bg-white/90 px-5 py-4 shadow-[0_20px_45px_rgba(15,23,42,0.18)] backdrop-blur">
+                                    <div className="flex items-center justify-between text-sm font-semibold text-slate-600">
+                                        <div>
+                                            <p className="text-xs uppercase tracking-wide text-slate-400">Patient rating</p>
+                                            <p className="text-lg text-slate-900">4.9/5</p>
+                                        </div>
+                                        <div className="h-10 w-px bg-slate-200" />
+                                        <div>
+                                            <p className="text-xs uppercase tracking-wide text-slate-400">Appointments</p>
+                                            <p className="text-lg text-slate-900">12k+</p>
+                                        </div>
+                                        <div className="h-10 w-px bg-slate-200" />
+                                        <div>
+                                            <p className="text-xs uppercase tracking-wide text-slate-400">Clinics</p>
+                                            <p className="text-lg text-slate-900">48</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Feature Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                        <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-lg transition">
-                            <div className="flex items-start space-x-4">
-                                <div className="flex-shrink-0">
-                                    <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-10 h-10 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                        </svg>
-                                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-24">
+                        <div className="rounded-3xl bg-white p-6 shadow-[0_25px_60px_rgba(15,23,42,0.08)] border border-slate-100 animate-rise">
+                            <div className="flex items-start gap-4">
+                                <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-bold text-gray-900 mb-2">Personal approach to everyone</h3>
-                                    <p className="text-gray-600">
-                                        Individual treatment programs. Comprehensive examination. Comfortable conditions.
+                                    <h3 className="text-xl font-semibold text-slate-900 mb-2">Personal approach to everyone</h3>
+                                    <p className="text-slate-500">
+                                        Tailored treatment plans, comprehensive examinations, and warm patient lounges in every clinic.
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-lime-100 rounded-2xl p-6 shadow-md hover:shadow-lg transition">
-                            <h3 className="text-lg font-bold text-gray-900 mb-4">Check-up list by directions:</h3>
-                            <div className="grid grid-cols-2 gap-3">
-                                <div className="flex items-center space-x-2">
-                                    <span className="w-2 h-2 bg-teal-600 rounded-full"></span>
-                                    <span className="text-sm font-medium">Gastroenterology</span>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <span className="w-2 h-2 bg-teal-600 rounded-full"></span>
-                                    <span className="text-sm font-medium">Cardiology</span>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <span className="w-2 h-2 bg-teal-600 rounded-full"></span>
-                                    <span className="text-sm font-medium">Pediatrics</span>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <span className="w-2 h-2 bg-teal-600 rounded-full"></span>
-                                    <span className="text-sm font-medium">Endocrinology</span>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <span className="w-2 h-2 bg-teal-600 rounded-full"></span>
-                                    <span className="text-sm font-medium">Gynecology</span>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <span className="w-2 h-2 bg-teal-600 rounded-full"></span>
-                                    <span className="text-sm font-medium">Immunology</span>
-                                </div>
+                        <div className="rounded-3xl bg-lime-100/80 p-6 shadow-[0_20px_50px_rgba(132,204,22,0.35)] border border-lime-200 animate-rise animate-delay-1">
+                            <h3 className="text-lg font-semibold text-slate-900 mb-4">Check-up list by directions</h3>
+                            <div className="grid grid-cols-2 gap-3 text-sm font-medium text-slate-600">
+                                {["Gastroenterology", "Cardiology", "Pediatrics", "Endocrinology", "Gynecology", "Immunology"].map((item) => (
+                                    <div key={item} className="flex items-center gap-2">
+                                        <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                                        {item}
+                                    </div>
+                                ))}
                             </div>
-                            <button className="mt-4 text-teal-600 font-semibold hover:text-teal-700 transition">
+                            <button className="mt-5 inline-flex items-center gap-2 text-emerald-700 font-semibold">
                                 Learn more →
                             </button>
                         </div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Services Section */}
-            <section className="py-24 bg-gradient-to-b from-white to-slate-50/70">
+            <section className="py-24 bg-gradient-to-b from-white to-slate-50/70 reveal-on-scroll">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
                     <div className="space-y-4">
                         <span className="inline-flex items-center gap-2 rounded-full border border-yellow-200 bg-yellow-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
@@ -267,7 +286,7 @@ const Home = () => {
                         {services.map((service, index) => (
                             <div
                                 key={index}
-                                className="rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-[0_25px_60px_rgba(15,23,42,0.07)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-emerald-400 hover:shadow-[0_30px_70px_rgba(15,23,42,0.12)]"
+                                className={`rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-[0_25px_60px_rgba(15,23,42,0.07)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-emerald-400 hover:shadow-[0_30px_70px_rgba(15,23,42,0.12)] animate-rise animate-delay-${(index % 4) + 1}`}
                             >
                                 <div className="flex items-center justify-between">
                                     <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
@@ -290,7 +309,7 @@ const Home = () => {
             </section>
 
             {/* Team Banner */}
-            <section className="bg-white">
+            <section className="bg-white reveal-on-scroll">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className=" overflow-hidden ">
                         <img
@@ -303,11 +322,11 @@ const Home = () => {
             </section>
 
             {/* Express Analysis Section */}
-            <section className="py-24 bg-gradient-to-br from-[#f6fbfb] via-white to-[#e9f7f4]">
+            <section className="py-24 bg-gradient-to-br from-[#f6fbfb] via-white to-[#e9f7f4] reveal-on-scroll">
                 <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.2fr)_1fr] items-center">
                         {/* Left - visual card */}
-                        <div className="relative">
+                        <div className="relative animate-rise">
                             <div className="rounded-[32px] bg-gradient-to-br from-[#32d5c1] to-[#058d7f] shadow-[0_40px_90px_rgba(5,141,127,0.35)] min-h-[360px] flex items-center justify-center overflow-hidden">
                                 <div className="absolute inset-0 opacity-30">
                                     <div className="absolute -right-20 top-10 w-64 h-64 bg-white/20 blur-3xl" />
@@ -341,7 +360,7 @@ const Home = () => {
                         </div>
 
                         {/* Right - content */}
-                        <div className="space-y-6">
+                        <div className="space-y-6 animate-rise animate-delay-1">
                             <div>
                                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal-500/80 mb-3">
                                     Express analysis
@@ -391,7 +410,7 @@ const Home = () => {
             </section>
 
             {/* Doctors Section */}
-            <section className="py-24 bg-white">
+            <section className="py-24 bg-white reveal-on-scroll">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
                     <div className="space-y-4">
                         <span className="inline-flex items-center gap-2 rounded-full border border-yellow-200 bg-yellow-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
@@ -410,7 +429,7 @@ const Home = () => {
                         {doctors.map((doctor, index) => (
                             <div
                                 key={doctor.name}
-                                className="rounded-[28px] border border-slate-100 bg-white/90 p-8 shadow-[0_25px_70px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-1 hover:border-emerald-300 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)]"
+                                className={`rounded-[28px] border border-slate-100 bg-white/90 p-8 shadow-[0_25px_70px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-1 hover:border-emerald-300 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] animate-rise animate-delay-${(index % 4) + 1}`}
                             >
                                 <div className="flex flex-col items-center text-center gap-4">
                                     <div className="relative">

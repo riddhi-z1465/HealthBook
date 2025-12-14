@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import Doctors from "./pages/Doctors";
 import DoctorDetails from "./pages/DoctorDetails";
 import Contact from "./pages/Contact";
+import Services from "./pages/Services";
 import Layout from "./components/Layout";
 
 // Protected Route Component
@@ -57,6 +58,7 @@ function AppRoutes() {
       <Route path="/doctors" element={<Layout><Doctors /></Layout>} />
       <Route path="/doctors/:id" element={<Layout><DoctorDetails /></Layout>} />
       <Route path="/contact" element={<Layout><Contact /></Layout>} />
+      <Route path="/services" element={<Layout><Services /></Layout>} />
 
       {/* Protected Routes */}
       <Route
