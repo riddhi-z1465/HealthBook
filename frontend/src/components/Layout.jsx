@@ -22,7 +22,7 @@ const Layout = ({ children }) => {
         }`}
       >
         <div className="relative flex flex-col items-center gap-6">
-          <div className="w-16 h-16 rounded-full border-4 border-emerald-200 border-t-emerald-500 animate-spin" />
+          <div className="loader"></div>
           <p className="typing-text">HealthBook</p>
           <p className="text-sm font-medium text-slate-500 tracking-wide uppercase">Loading your experience…</p>
         </div>

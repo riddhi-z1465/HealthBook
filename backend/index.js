@@ -91,8 +91,11 @@ const PORT = process.env.PORT || 5000;
 
 const startServer = async () => {
     try {
+        console.log("Attempting to connect to MongoDB...");
         await connectDB();
+        console.log("MongoDB connected. Creating admin...");
         await createDefaultAdmin();
+        console.log("Admin check complete. Starting express...");
 
         app.listen(PORT, () => {
             console.log(`\n🚀 HealthBook Server is running`);

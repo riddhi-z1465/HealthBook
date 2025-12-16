@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { HiStar } from "react-icons/hi";
+import { BsArrowUpRight } from "react-icons/bs";
 import doctorTeam from "../assets/images/DoctorTeamImage.png";
 import doctorTeamHero from "../assets/images/DoctorTeam.png";
 import heroFallback from "../assets/images/hero-img01.png";
+import expressTeam from "../assets/images/express-team.jpg";
 
 const Home = () => {
 
@@ -11,42 +14,42 @@ const Home = () => {
     const ServiceIcon = ({ type }) => {
         const icons = {
             adult: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
             ),
             child: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             ),
             home: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
             ),
             surgery: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                 </svg>
             ),
             ultrasound: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                 </svg>
             ),
             xray: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
             ),
             diagnostic: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                 </svg>
             ),
             medical: (
-                <svg className="w-12 h-12 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
             ),
@@ -55,14 +58,62 @@ const Home = () => {
     };
 
     const services = [
-        { iconType: "adult", title: "Adult Reception", subtitle: "Consultation" },
-        { iconType: "child", title: "Children's Reception", subtitle: "Pediatrics" },
-        { iconType: "home", title: "Home Visit", subtitle: "Doctor at home" },
-        { iconType: "surgery", title: "Operational Block", subtitle: "Surgery" },
-        { iconType: "ultrasound", title: "Ultrasound Diagnostics", subtitle: "Examination" },
-        { iconType: "xray", title: "X-ray Cabinet", subtitle: "Diagnostics" },
-        { iconType: "diagnostic", title: "Functional Diagnostics", subtitle: "Analysis" },
-        { iconType: "medical", title: "Medical Services", subtitle: "At home" },
+        {
+            iconType: "adult",
+            title: "Adult Reception",
+            subtitle: "Consultation",
+            description: "Comprehensive general health checkups and consultations for adults, focusing on preventive care and disease management.",
+            doctorCount: "25"
+        },
+        {
+            iconType: "child",
+            title: "Children's Reception",
+            subtitle: "Pediatrics",
+            description: "Specialized pediatric care ensuring the physical, mental, and social health of children from birth through adolescence.",
+            doctorCount: "18"
+        },
+        {
+            iconType: "home",
+            title: "Home Visit",
+            subtitle: "Doctor at home",
+            description: "Convenient medical care delivered right to your doorstep for patients who cannot visit the clinic due to illness or mobility.",
+            doctorCount: "12"
+        },
+        {
+            iconType: "surgery",
+            title: "Operational Block",
+            subtitle: "Surgery",
+            description: "State-of-the-art surgical facilities equipped for a wide range of procedures, ensuring patient safety and surgical precision.",
+            doctorCount: "15"
+        },
+        {
+            iconType: "ultrasound",
+            title: "Ultrasound Diagnostics",
+            subtitle: "Examination",
+            description: "High-resolution ultrasound imaging for accurate diagnosis of internal conditions, safe for women and all patient groups.",
+            doctorCount: "8"
+        },
+        {
+            iconType: "xray",
+            title: "X-ray Cabinet",
+            subtitle: "Diagnostics",
+            description: "Advanced digital X-ray services providing quick and clear imaging for bone fractures, chest infections, and dental issues.",
+            doctorCount: "6"
+        },
+        {
+            iconType: "diagnostic",
+            title: "Functional Diagnostics",
+            subtitle: "Analysis",
+            description: "Comprehensive testing to assess the physiological function of organs like the heart, lungs, and nervous system.",
+            doctorCount: "10"
+        },
+        {
+            iconType: "medical",
+            title: "Medical Services",
+            subtitle: "At home",
+            description: "A wide range of general medical services including vaccinations, wound care, health screenings, and routine monitoring.",
+            doctorCount: "20"
+        },
     ];
 
     const doctors = [
@@ -145,7 +196,7 @@ const Home = () => {
                                 </p>
                             </div>
 
-           			    <div className="flex flex-wrap gap-4 animate-rise animate-delay-2">
+                            <div className="flex flex-wrap gap-4 animate-rise animate-delay-2">
                                 <Link
                                     to="/register"
                                     className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-[0_18px_35px_rgba(16,185,129,0.35)] hover:-translate-y-0.5 hover:bg-emerald-700 transition-transform"
@@ -233,9 +284,9 @@ const Home = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h3 className="text-xl font-semibold text-slate-900 mb-2">Personal approach to everyone</h3>
+                                    <h3 className="text-xl font-semibold text-slate-900 mb-2">Healthcare for every stage of life</h3>
                                     <p className="text-slate-500">
-                                        Tailored treatment plans, comprehensive examinations, and warm patient lounges in every clinic.
+                                        From routine checkups to specialist care, we support individuals and families with reliable medical services.
                                     </p>
                                 </div>
                             </div>
@@ -282,26 +333,41 @@ const Home = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         {services.map((service, index) => (
                             <div
                                 key={index}
-                                className={`rounded-3xl border border-slate-100 bg-white/90 p-6 shadow-[0_25px_60px_rgba(15,23,42,0.07)] backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-emerald-400 hover:shadow-[0_30px_70px_rgba(15,23,42,0.12)] animate-rise animate-delay-${(index % 4) + 1}`}
+                                className="group relative overflow-hidden rounded-[30px] bg-white p-8 shadow-[0_10px_40px_rgba(0,0,0,0.05)] transition-all hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]"
                             >
-                                <div className="flex items-center justify-between">
-                                    <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                                {/* Faint Background Icon */}
+                                <div className="absolute -right-4 -top-4 opacity-[0.03] transition-transform group-hover:scale-110">
+                                    <div className="scale-[2.5]">
                                         <ServiceIcon type={service.iconType} />
                                     </div>
-                                    <span className="text-xs font-semibold uppercase tracking-wide text-slate-300">0{index + 1}</span>
                                 </div>
-                                <h3 className="mt-6 text-xl font-semibold text-slate-900">{service.title}</h3>
-                                <p className="text-sm text-slate-500">{service.subtitle}</p>
-                                <div className="mt-6 inline-flex items-center gap-2 text-emerald-600 font-semibold text-sm">
-                                    Explore
-                                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-emerald-100 bg-emerald-50 text-base">
-                                        →
-                                    </span>
+
+                                {/* Main Content */}
+                                <div className="relative z-10">
+                                    <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-teal-50 text-teal-600 transition-colors group-hover:bg-teal-600 group-hover:text-white">
+                                        <ServiceIcon type={service.iconType} />
+                                    </div>
+
+                                    <h3 className="mb-3 text-xl font-bold text-slate-900">{service.title}</h3>
+
+                                    <p className="mb-10 text-sm leading-relaxed text-slate-500">
+                                        {service.description}
+                                    </p>
+
+                                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-600">
+                                        <span className="h-2 w-2 rounded-full bg-teal-500" />
+                                        <span>{service.doctorCount}+ Doctors</span>
+                                    </div>
                                 </div>
+
+                                {/* Corner Button */}
+                                <button className="absolute bottom-0 right-0 flex h-16 w-16 items-center justify-center rounded-br-[30px] rounded-tl-[32px] bg-teal-600 text-white transition-colors hover:bg-teal-700">
+                                    {/* <BsArrowUpRight className="text-2xl" /> */}
+                                </button>
                             </div>
                         ))}
                     </div>
@@ -327,33 +393,17 @@ const Home = () => {
                     <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,1.2fr)_1fr] items-center">
                         {/* Left - visual card */}
                         <div className="relative animate-rise">
-                            <div className="rounded-[32px] bg-gradient-to-br from-[#32d5c1] to-[#058d7f] shadow-[0_40px_90px_rgba(5,141,127,0.35)] min-h-[360px] flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 opacity-30">
-                                    <div className="absolute -right-20 top-10 w-64 h-64 bg-white/20 blur-3xl" />
-                                    <div className="absolute left-10 bottom-6 w-32 h-32 border border-white/20 rounded-[40px] rotate-6" />
-                                </div>
-                                <div className="relative text-center text-white space-y-4">
-                                    <div className="inline-flex items-center justify-center w-24 h-24 rounded-full border-2 border-white/50">
-                                        <svg
-                                            className="w-12 h-12"
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={1.4}
-                                                d="M10 3h4l-.3 6.4a3 3 0 00.73 2.13l5.72 6.43c.97 1.1.16 2.84-1.32 2.84H5.17c-1.48 0-2.29-1.74-1.32-2.84l5.72-6.43A3 3 0 0010.3 9.4L10 3z"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <div className="space-y-1">
-                                        <p className="text-sm uppercase tracking-[0.3em] text-white/70">Laboratory</p>
-                                        <p className="text-3xl font-semibold">Express analysis</p>
-                                        <p className="text-sm text-white/80">
-                                            Fast diagnostics • Accurate results
-                                        </p>
+                            <div className="relative h-full min-h-[400px] overflow-hidden rounded-[32px] shadow-[0_40px_90px_rgba(15,23,42,0.15)] transition-transform hover:scale-[1.02]">
+                                <img
+                                    src={expressTeam}
+                                    alt="Medical Professional Team"
+                                    className="absolute inset-0 h-full w-full object-cover"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                                <div className="absolute bottom-6 left-6 right-6">
+                                    <div className="inline-flex items-center gap-2 rounded-full bg-white/20 backdrop-blur-md border border-white/20 px-4 py-2 text-sm font-semibold text-white shadow-lg">
+                                        <span className="text-emerald-300">✓</span>
+                                        <span>Top-rated Specialists</span>
                                     </div>
                                 </div>
                             </div>
@@ -429,36 +479,39 @@ const Home = () => {
                         {doctors.map((doctor, index) => (
                             <div
                                 key={doctor.name}
-                                className={`rounded-[28px] border border-slate-100 bg-white/90 p-8 shadow-[0_25px_70px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-1 hover:border-emerald-300 hover:shadow-[0_30px_80px_rgba(15,23,42,0.12)] animate-rise animate-delay-${(index % 4) + 1}`}
+                                className="group relative flex flex-col items-center rounded-[40px] border border-transparent bg-white p-8 px-6 text-center shadow-[0_20px_50px_rgba(15,23,42,0.05)] transition-all duration-300 hover:-translate-y-2 hover:border-emerald-400 hover:shadow-[0_20px_60px_rgba(16,185,129,0.15)]"
                             >
-                                <div className="flex flex-col items-center text-center gap-4">
-                                    <div className="relative">
-                                        <div className="h-28 w-28 rounded-full bg-gradient-to-br from-emerald-100 to-cyan-100 flex items-center justify-center text-5xl text-emerald-600">
-                                            <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                                            </svg>
-                                        </div>
-                                        <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-lime-100 px-3 py-1 text-xs font-semibold text-emerald-700 shadow-sm">
-                                            {doctor.specialty}
-                                        </span>
+                                {/* Avatar & Specialty */}
+                                <div className="relative mb-6">
+                                    <div className="flex h-28 w-28 items-center justify-center rounded-full bg-[#dcfce7] text-5xl text-emerald-600 transition-transform duration-300 group-hover:scale-105">
+                                        <svg className="w-14 h-14" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                                        </svg>
                                     </div>
-                                    <div>
-                                        <h3 className="text-xl font-semibold text-slate-900">{doctor.name}</h3>
-                                        <p className="text-sm text-slate-500">{doctor.experience}</p>
-                                    </div>
-                                    <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1 text-sm font-semibold text-amber-700">
-                                        <span>⭐</span>
-                                        <span>{doctor.rating}</span>
-                                        <span className="text-amber-400">•</span>
-                                        <span>Patient favorite</span>
-                                    </div>
-                                    <Link
-                                        to={`/doctors/${index + 1}`}
-                                        className="mt-2 inline-flex w-full items-center justify-center rounded-full bg-emerald-600 px-6 py-3 font-semibold text-white shadow-[0_15px_35px_rgba(16,185,129,0.35)] hover:bg-emerald-700"
-                                    >
-                                        Book Appointment
-                                    </Link>
+                                    <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-[#ecfccb] px-4 py-1.5 text-xs font-bold uppercase tracking-wide text-lime-800 shadow-sm border-[3px] border-white">
+                                        {doctor.specialty}
+                                    </span>
                                 </div>
+
+                                {/* Info */}
+                                <h3 className="mb-1 text-xl font-bold text-slate-900">{doctor.name}</h3>
+                                <p className="mb-6 text-sm font-medium text-slate-500">{doctor.experience} experience</p>
+
+                                {/* Rating Pill */}
+                                <div className="mb-8 inline-flex items-center gap-2 rounded-full bg-[#fffbeb] px-5 py-2 text-sm font-bold text-amber-500">
+                                    <HiStar className="text-lg text-amber-400" />
+                                    <span>{doctor.rating}</span>
+                                    <span className="h-1 w-1 rounded-full bg-amber-300" />
+                                    <span className="text-amber-700/80">Patient favorite</span>
+                                </div>
+
+                                {/* Action Button */}
+                                <Link
+                                    to={`/doctors`}
+                                    className="w-full rounded-full bg-[#00a884] py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-500/20 transition-all hover:bg-[#008f70] hover:shadow-emerald-500/40 active:scale-95"
+                                >
+                                    Book Appointment
+                                </Link>
                             </div>
                         ))}
                     </div>

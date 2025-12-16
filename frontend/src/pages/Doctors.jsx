@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaStar, FaMapMarkerAlt, FaBriefcase } from "react-icons/fa";
 import AuthPromptModal from "../components/AuthPromptModal";
 import BookAppointmentModal from "../components/BookAppointmentModal";
 import { api, useAuth } from "../context/AuthContext";
@@ -95,11 +96,10 @@ const Doctors = () => {
                         <button
                             key={spec}
                             onClick={() => setActiveSpecialty(spec)}
-                            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                                activeSpecialty === spec
-                                    ? "bg-teal-600 text-white"
-                                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            }`}
+                            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${activeSpecialty === spec
+                                ? "bg-teal-600 text-white"
+                                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                                }`}
                         >
                             {spec === "all" ? "All specialties" : spec}
                         </button>
@@ -159,19 +159,20 @@ const Doctors = () => {
                             </div>
                             <div className="mt-5 flex flex-wrap items-center gap-4 text-sm text-gray-600">
                                 <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1 font-semibold text-amber-600">
-                                    ⭐ {doctor.averageRating?.toFixed(1) || "—"}{" "}
+                                    <FaStar className="text-amber-500 text-lg" />
+                                    {doctor.averageRating?.toFixed(1) || "—"}{" "}
                                     <span className="text-xs text-amber-500">
                                         ({doctor.totalRating || 0} reviews)
                                     </span>
                                 </span>
                                 {doctor.hospital?.city && (
                                     <span className="inline-flex items-center gap-2">
-                                        <span className="text-lg">📍</span>
+                                        <FaMapMarkerAlt className="text-teal-600 text-lg" />
                                         {doctor.hospital.city}
                                     </span>
                                 )}
                                 <span className="inline-flex items-center gap-2">
-                                    <span className="text-lg">💼</span>
+                                    <FaBriefcase className="text-gray-500 text-lg" />
                                     {doctor.totalPatients || 0} patients
                                 </span>
                             </div>

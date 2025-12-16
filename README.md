@@ -43,6 +43,7 @@ A full-stack MERN (MongoDB, Express, React, Node.js) application for managing ho
 - **Axios** - HTTP client
 - **TailwindCSS** - Styling
 - **React Toastify** - Notifications
+- **React Icons** - Iconography
 - **Vite** - Build tool
 
 ## 📁 Project Structure
@@ -83,6 +84,8 @@ healthbook/
     │   │   ├── Doctors.jsx
     │   │   ├── DoctorDetails.jsx
     │   │   └── Contact.jsx
+    │   ├── components/
+    │   │   └── Header.jsx        # Glassmorphism Navbar
     │   ├── App.jsx               # Main app with routing
     │   ├── main.jsx              # React entry point
     │   └── index.css             # Global styles
@@ -101,7 +104,7 @@ healthbook/
 
 #### 1. Clone the repository
 ```bash
-cd Youtube-Tutorials-MERN-Medicare-Booking-Website
+cd HealthBook
 ```
 
 #### 2. Setup Backend
@@ -112,7 +115,7 @@ npm install
 
 Create `.env` file:
 ```env
-PORT=8000
+PORT=5001
 NODE_ENV=development
 MONGO_URI=mongodb://localhost:27017/healthbook
 JWT_SECRET=your_secret_key_here
@@ -129,7 +132,7 @@ Start backend server:
 npm start
 ```
 
-Backend will run on `http://localhost:8000`
+Backend will run on `http://localhost:5001`
 
 #### 3. Setup Frontend
 ```bash
@@ -143,6 +146,18 @@ npm run dev
 ```
 
 Frontend will run on `http://localhost:5173`
+
+### 🌐 Deployment (Vercel + Hosted API)
+
+The repository contains both backend and frontend. When deploying with Vercel you must point it at the React client.
+
+1. **Project Root**: set the Vercel root directory to `frontend/`.
+2. **Build Command**: `npm run build`
+3. **Output Directory**: `dist`
+4. **Environment Variables**: define `VITE_API_URL` so the frontend knows where the backend lives (e.g. `https://your-api.example.com/api`).
+5. **Backend Hosting**: deploy `/backend` separately (Railway, Render, EC2, etc.). Make sure the backend `.env` uses the production MongoDB URI and the `CLIENT_URL` points to the Vercel domain.
+
+After deployment, hit `https://your-vercel-app.vercel.app` and the SPA routes will work because Vercel serves the built `dist` folder.
 
 ### Default Admin Login
 
@@ -268,7 +283,7 @@ A bootstrap routine now ensures an administrator account exists whenever the bac
 - Admin approval workflow
 - Profile management
 
-### 📋 Planned
+### 📋 Planned & Recent UX Enhancements
 - Email notifications
 - SMS reminders
 - Payment integration
@@ -276,6 +291,7 @@ A bootstrap routine now ensures an administrator account exists whenever the bac
 - Analytics dashboard
 - PDF report generation
 - File upload for medical documents
+- Additional UI polish (animated hero sections, scroll reveals, global loading overlay, doctor profile editor & schedule manager)
 
 ## 🤝 Contributing
 

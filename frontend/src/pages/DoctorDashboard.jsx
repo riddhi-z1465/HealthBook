@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HiOutlineBadgeCheck, HiOutlineClock, HiOutlineRefresh } from "react-icons/hi";
 import { api, useAuth } from "../context/AuthContext";
 
 const statusPills = {
@@ -179,63 +180,77 @@ const DoctorDashboard = () => {
 
     const disabled = user?.isApproved !== "approved";
 
+    const firstName = user?.name?.split(" ")[0] || "Caregiver";
+    const specialization = user?.specialization || user?.medicalTitle || "General Physician";
+    const statusLabel = user?.isApproved === "approved" ? "Verified" : user?.isApproved === "pending" ? "Pending review" : "Needs verification";
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50 py-10">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-                <header className="rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-500 text-white p-8 shadow-2xl relative overflow-hidden">
-                    <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between relative z-10">
-                        <div>
-                            <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1 text-sm font-medium">
-                                <span className="text-lg">🩺</span>
-                                {user?.specialization || "Doctor"}
+                <header className="rounded-[36px] bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-500 text-white p-8 lg:p-10 shadow-2xl relative overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.4),_transparent_55%)]" />
+                    <div className="relative z-10 flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+                        <div className="space-y-6 max-w-3xl">
+                            <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1 text-sm font-semibold tracking-wide">
+                                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/20 text-base">⚕️</span>
+                                {specialization}
                             </div>
-                            <h1 className="mt-4 text-4xl font-bold leading-tight">
-                                Welcome back, Dr. {user?.name?.split(" ")[0] || "Caregiver"}
-                            </h1>
-                            <p className="mt-2 text-white/80 text-lg max-w-2xl">
-                                Track today’s workload, stay on top of approvals, and manage every patient visit from one modern dashboard.
-                            </p>
-                        </div>
-                        <div className="rounded-2xl bg-white/10 backdrop-blur p-5 min-w-[220px] space-y-3">
-                            <div>
-                                <p className="text-sm uppercase tracking-wide text-white/70">Account Status</p>
-                                <p className="text-2xl font-semibold mt-1 flex items-center gap-2">
-                                {user?.isApproved === "approved" ? "Verified" : user?.isApproved === "pending" ? "Pending" : "Review Needed"}
-                                {user?.isApproved === "approved" ? "✅" : "⏳"}
+                            <div className="space-y-3">
+                                <p className="text-sm uppercase tracking-[0.4em] text-white/70">Dashboard</p>
+                                <h1 className="text-4xl sm:text-5xl font-bold leading-tight">Welcome back, Dr. {firstName}</h1>
+                                <p className="text-lg text-white/80 max-w-2xl">
+                                    Track today’s workload, stay on top of approvals, and manage every patient visit from one modern dashboard.
                                 </p>
-                                <p className="text-white/80 mt-2 text-sm">
+                            </div>
+                            <div className="grid gap-4 sm:grid-cols-2">
+                                <div className="rounded-2xl border border-white/30 bg-white/10/0 p-4 backdrop-blur-sm">
+                                    <p className="text-xs uppercase tracking-[0.5em] text-white/70">Today</p>
+                                    <p className="mt-3 text-3xl font-semibold">{countByStatus.today}</p>
+                                    <p className="text-sm text-white/75">Appointments scheduled</p>
+                                </div>
+                                <div className="rounded-2xl border border-white/30 bg-white/10/0 p-4 backdrop-blur-sm">
+                                    <p className="text-xs uppercase tracking-[0.5em] text-white/70">Pending</p>
+                                    <p className="mt-3 text-3xl font-semibold">{countByStatus.pending}</p>
+                                    <p className="text-sm text-white/75">Awaiting approval</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full max-w-sm rounded-3xl bg-white/15 backdrop-blur p-6 space-y-5 border border-white/10">
+                            <div className="rounded-2xl bg-white/10 p-5 space-y-3">
+                                <p className="text-sm uppercase tracking-[0.3em] text-white/70">Account status</p>
+                                <div className="flex items-center gap-2 text-2xl font-semibold">
+                                    {statusLabel}
+                                    {user?.isApproved === "approved" ? (
+                                        <HiOutlineBadgeCheck className="h-7 w-7 text-emerald-200" />
+                                    ) : (
+                                        <HiOutlineClock className="h-7 w-7 text-amber-200" />
+                                    )}
+                                </div>
+                                <p className="text-sm text-white/80">
                                     {!disabled
                                         ? "You can manage appointments freely."
                                         : "Waiting for admin approval. You’ll be notified once reviewed."}
                                 </p>
                             </div>
-                            <div className="rounded-2xl border border-white/20 px-4 py-3 text-sm text-white/80 space-y-3">
+                            <div className="rounded-2xl border border-white/20 p-5 space-y-4 text-sm text-white/80">
                                 <div className="flex items-center justify-between">
                                     <span>Last sync</span>
                                     <span className="font-semibold">{lastSynced ? lastSynced.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : "—"}</span>
                                 </div>
-                                <div className="flex flex-col gap-2">
+                                <div className="grid gap-3">
                                     <button
                                         onClick={refreshDashboard}
                                         disabled={refreshing}
-                                        className="w-full rounded-full border border-white/40 py-1.5 text-sm font-semibold text-white hover:bg-white/10 disabled:opacity-50"
+                                        className="inline-flex items-center justify-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-semibold text-white hover:bg-white/30 disabled:opacity-50"
                                         type="button"
                                     >
+                                        <HiOutlineRefresh className="h-4 w-4" />
                                         {refreshing ? "Refreshing…" : "Force refresh"}
-                                    </button>
-                                    <button
-                                        onClick={() => navigate("/doctor/profile")}
-                                        disabled={disabled}
-                                        className="w-full rounded-full border border-white/40 py-1.5 text-sm font-semibold text-white hover:bg-white/10 disabled:opacity-50"
-                                        type="button"
-                                    >
-                                        Doctor profile
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.45),_transparent_55%)]" />
                 </header>
 
                 {dashboardError && (

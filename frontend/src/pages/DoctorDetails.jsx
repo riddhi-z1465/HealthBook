@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { FaStar, FaBriefcase, FaMoneyBillWave } from "react-icons/fa";
 import AuthPromptModal from "../components/AuthPromptModal";
 import BookAppointmentModal from "../components/BookAppointmentModal";
 import { api, useAuth } from "../context/AuthContext";
@@ -148,13 +149,13 @@ const DoctorDetails = () => {
                             </p>
                             <div className="flex flex-wrap gap-4 text-sm text-slate-600">
                                 <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1">
-                                    ⭐ {doctor.averageRating ? doctor.averageRating.toFixed(1) : "—"} ({doctor.totalRating || 0} reviews)
+                                    <FaStar className="text-amber-500" /> {doctor.averageRating ? doctor.averageRating.toFixed(1) : "—"} ({doctor.totalRating || 0} reviews)
                                 </span>
                                 <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1">
-                                    🕒 {yearsOfExperience ? `${yearsOfExperience}+ yrs experience` : "Experience info unavailable"}
+                                    <FaBriefcase className="text-slate-500" /> {yearsOfExperience ? `${yearsOfExperience}+ yrs experience` : "Experience info unavailable"}
                                 </span>
                                 <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1">
-                                    💳 {doctor.ticketPrice ? `₹${doctor.ticketPrice.toLocaleString()}` : "Fee on request"}
+                                    <FaMoneyBillWave className="text-emerald-600" /> {doctor.ticketPrice ? `₹${doctor.ticketPrice.toLocaleString()}` : "Fee on request"}
                                 </span>
                             </div>
                         </div>
@@ -197,11 +198,11 @@ const DoctorDetails = () => {
                                 <dd className="mt-1 space-y-1 text-sm text-slate-700">
                                     {doctor.qualifications?.length
                                         ? doctor.qualifications.map((q, index) => (
-                                              <div key={`${q.degree}-${index}`} className="rounded-2xl bg-slate-50 px-4 py-2">
-                                                  <p className="font-semibold text-slate-900">{q.degree}</p>
-                                                  <p className="text-xs text-slate-500">{q.university}</p>
-                                              </div>
-                                          ))
+                                            <div key={`${q.degree}-${index}`} className="rounded-2xl bg-slate-50 px-4 py-2">
+                                                <p className="font-semibold text-slate-900">{q.degree}</p>
+                                                <p className="text-xs text-slate-500">{q.university}</p>
+                                            </div>
+                                        ))
                                         : "Qualification details not provided."}
                                 </dd>
                             </div>
@@ -228,10 +229,10 @@ const DoctorDetails = () => {
                                 <dd className="mt-1 text-sm text-slate-700 space-y-1">
                                     {doctor.certifications?.length
                                         ? doctor.certifications.map((cert, idx) => (
-                                              <div key={`${cert}-${idx}`} className="rounded-2xl bg-slate-50 px-4 py-2 text-sm text-slate-700">
-                                                  {cert}
-                                              </div>
-                                          ))
+                                            <div key={`${cert}-${idx}`} className="rounded-2xl bg-slate-50 px-4 py-2 text-sm text-slate-700">
+                                                {cert}
+                                            </div>
+                                        ))
                                         : "No additional certifications listed."}
                                 </dd>
                             </div>
