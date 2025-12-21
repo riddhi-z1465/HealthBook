@@ -118,21 +118,21 @@ const Home = () => {
 
     const doctors = [
         {
-            name: "Dr. Alfaz Ahmed",
+            name: "Dr. Nilesh Naik",
             specialty: "Surgeon",
             experience: "15+ years",
             rating: 4.8,
             image: "👨‍⚕️",
         },
         {
-            name: "Dr. Saleh Mahmud",
+            name: "Dr. Suresh Thombre",
             specialty: "Neurologist",
             experience: "12+ years",
             rating: 4.9,
             image: "👨‍⚕️",
         },
         {
-            name: "Dr. Farid Uddin",
+            name: "Dr. Ashish Thakur",
             specialty: "Dermatologist",
             experience: "10+ years",
             rating: 4.7,
@@ -337,7 +337,8 @@ const Home = () => {
                         {services.map((service, index) => (
                             <div
                                 key={index}
-                                className="group relative overflow-hidden rounded-[30px] bg-white p-8 shadow-[0_10px_40px_rgba(0,0,0,0.05)] transition-all hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]"
+                                className="group relative overflow-hidden rounded-[30px] bg-white p-8 shadow-[0_10px_40px_rgba(0,0,0,0.05)] transition-all reveal-on-scroll hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.1)]"
+                                style={{ transitionDelay: `${index * 100}ms` }}
                             >
                                 {/* Faint Background Icon */}
                                 <div className="absolute -right-4 -top-4 opacity-[0.03] transition-transform group-hover:scale-110">
